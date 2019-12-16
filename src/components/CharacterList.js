@@ -37,13 +37,11 @@ export default function CharacterList() {
         url += "&" + q.key + "=" + q.value;
       }
     })
-    console.log("set api url to " + url);
     setPage(url);
   }
   const [showFilter, setShowFilter] = useState(false);
 
   useEffect(() => {
-    console.log("page must have changed; value is now " + page);
     Axios.get(page)
       .then(res => {
         setCharacters(res.data.results);
