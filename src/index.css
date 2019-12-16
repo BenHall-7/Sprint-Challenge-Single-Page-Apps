@@ -4,7 +4,7 @@ body {
   font-family: sans-serif;
 }
 
-main {
+.App {
   width: 85vw;
   min-height: 80vh;
   max-width: 1024px;
@@ -36,4 +36,48 @@ main {
 
 header h1 {
   text-align: center;
+}
+
+nav {
+  margin: 10px 0;
+}
+
+a {
+  font-style: none;
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+input {
+  display: block;
+  margin: 5px 0;
+}
+
+.character-page-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  padding: 10px 0;
+  margin: 10px 0;
+  border-top: 1px dashed grey;
+  border-bottom: 1px dashed grey;
+}
+
+.search-form p {
+  margin: 0 0 5px;
 }
