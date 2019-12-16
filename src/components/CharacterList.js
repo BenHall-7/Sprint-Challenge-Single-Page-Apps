@@ -3,8 +3,10 @@ import Axios from "axios";
 import CharacterCard from './CharacterCard';
 import SearchForm from './SearchForm';
 
+const BASE_CHARACTER_URL = "https://rickandmortyapi.com/api/character/";
+
 export default function CharacterList() {
-  const [page, setPage] = useState("https://rickandmortyapi.com/api/character/");
+  const [page, setPage] = useState(BASE_CHARACTER_URL);
   const [characters, setCharacters] = useState([]);
   const [next, setNext] = useState("");
   const [prev, setPrev] = useState("");
@@ -15,11 +17,33 @@ export default function CharacterList() {
     status: "",
     species: "",
     gender: "",
-    caseSensitive: false,
-  })
+  });
+  const setFilterWrapper = input => {
+    setFilter(input);
+    let url = BASE_CHARACTER_URL;
+    let queries = [];
+    for (let key in input) {
+      if (input[key].length > 0) {
+        queries.push({
+          key: key,
+          value: input[key]
+        });
+      }
+    }
+    queries.forEach((q, ind) => {
+      if (ind == 0) {
+        url += "?" + q.key + "=" + q.value;
+      } else {
+        url += "&" + q.key + "=" + q.value;
+      }
+    })
+    console.log("set api url to " + url);
+    setPage(url);
+  }
   const [showFilter, setShowFilter] = useState(false);
 
   useEffect(() => {
+    console.log("page must have changed; value is now " + page);
     Axios.get(page)
       .then(res => {
         setCharacters(res.data.results);
@@ -42,30 +66,9 @@ export default function CharacterList() {
           onClick={() => {setPage(next)}}>Next Page</button>
       </div>
       {showFilter && 
-        <SearchForm {...filter} setFilter={setFilter}/>
+        <SearchForm {...filter} setFilter={setFilterWrapper}/>
       }
-      {
-        characters
-          .filter(c => {
-            let params = ["name", "type", "status", "species", "gender"];
-            if (showFilter) {
-              for (let p of params) {
-                if (filter[p] && filter[p].length > 0) {
-                  // check for case sensitivity
-                  if (filter.caseSensitive) {
-                    if (!c[p] || !c[p].includes(filter[p])) {
-                      return false;
-                    }
-                  } else if (!c[p] || !c[p].toLowerCase().includes(filter[p].toLowerCase())) {
-                    return false;
-                  }
-                }
-              }
-            }
-            return true;
-          })
-          .map(c => <CharacterCard character={c} key={c.id}/>)
-      }
+      {characters.map(c => <CharacterCard character={c} key={c.id}/>)}
     </section>
   );
 }

@@ -11,8 +11,6 @@ function searchForm({setFilter}) {
         <Field type="text" name="status" placeholder="Status"/>
         <Field type="text" name="species" placeholder="Species"/>
         <Field type="text" name="gender" placeholder="Gender"/>
-        <label>Case-sensitive:</label>
-        <Field type="checkbox" name="caseSensitive"/>
         <button>Submit</button>
       </Form>
     </section>
@@ -27,7 +25,6 @@ const SearchForm = withFormik({
       status: status || "",
       species: species || "",
       gender: gender || "",
-      caseSensitive: caseSensitive || false,
     }
   },
 
