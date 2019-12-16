@@ -1,11 +1,13 @@
 import React from "react";
-import Header from "./components/Header.js";
-
+import { Route } from 'react-router-dom';
+import Header from "./components/Header";
+import WelcomePage from './components/WelcomePage';
 
 export default function App() {
   return (
-    <main>
+    <div className="App">
       <Header />
-    </main>
+      <Route exact path="/" component={WelcomePage}/>
+    </div>
   );
 }
