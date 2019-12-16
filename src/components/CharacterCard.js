@@ -5,10 +5,12 @@ let Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: left;
+  padding: 10px;
 
   img {
     width: 200px;
     height: 200px;
+    margin-right: 40px;
     object-fit: cover;
   }
 `;
@@ -24,6 +26,7 @@ export default function CharacterCard({character}) {
         {character.type && <p>Type: {character.type}</p>}
         <p>Status: {character.status}</p>
         <p>Species: {character.species}</p>
+        <p>Gender: {character.gender}</p>
       </div>
     </Wrapper>
   )
