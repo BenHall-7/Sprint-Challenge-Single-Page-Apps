@@ -8,6 +8,14 @@ export default function CharacterList() {
   const [characters, setCharacters] = useState([]);
   const [next, setNext] = useState("");
   const [prev, setPrev] = useState("");
+
+  const [filter, setFilter] = useState({
+    name: "",
+    type: "",
+    status: "",
+    species: "",
+    gender: "",
+  })
   const [showFilter, setShowFilter] = useState(false);
 
   useEffect(() => {
@@ -33,9 +41,25 @@ export default function CharacterList() {
           onClick={() => {setPage(next)}}>Next Page</button>
       </div>
       {showFilter && 
-        <SearchForm />
+        <SearchForm {...filter} setFilter={setFilter}/>
       }
-      {characters.map(c => <CharacterCard character={c} key={c.id}/>)}
+      {
+        characters
+          .filter(c => {
+            let params = ["name", "type", "status", "species", "gender"];
+            if (showFilter) {
+              for (let p of params) {
+                if (filter[p] && filter[p].length > 0) {
+                  if (!c[p] || !c[p].toLowerCase().includes(filter[p].toLowerCase())) {
+                    return false;
+                  }
+                }
+              }
+            }
+            return true;
+          })
+          .map(c => <CharacterCard character={c} key={c.id}/>)
+      }
     </section>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {withFormik, Form, Field} from 'formik';
 
-function searchForm() {
+function searchForm({setFilter}) {
   return (
     <section className="search-form">
       <p>Filter</p>
@@ -28,8 +28,9 @@ const SearchForm = withFormik({
     }
   },
 
-  handleSubmit(values, {props, resetForm, setSubmitting}) {
-    
+  handleSubmit(values, {props, setSubmitting}) {
+    props.setFilter(values);
+    setSubmitting(false);
   }
 })(searchForm);
 

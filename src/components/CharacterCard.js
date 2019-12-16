@@ -16,8 +16,6 @@ let Wrapper = styled.div`
 `;
 
 export default function CharacterCard({character}) {
-  console.log(character);
-
   return (
     <Wrapper>
       <img src={character.image} alt={character.name}/>
