@@ -15,6 +15,7 @@ export default function CharacterList() {
     status: "",
     species: "",
     gender: "",
+    caseSensitive: false,
   })
   const [showFilter, setShowFilter] = useState(false);
 
@@ -50,7 +51,12 @@ export default function CharacterList() {
             if (showFilter) {
               for (let p of params) {
                 if (filter[p] && filter[p].length > 0) {
-                  if (!c[p] || !c[p].toLowerCase().includes(filter[p].toLowerCase())) {
+                  // check for case sensitivity
+                  if (filter.caseSensitive) {
+                    if (!c[p] || !c[p].includes(filter[p])) {
+                      return false;
+                    }
+                  } else if (!c[p] || !c[p].toLowerCase().includes(filter[p].toLowerCase())) {
                     return false;
                   }
                 }
