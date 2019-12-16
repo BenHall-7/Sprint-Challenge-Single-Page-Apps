@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 export default function CharacterList() {
   const [characters, setCharacters] = useState([]);
-  const [next, setNext] = useState([]);
-  const [prev, setPrev] = useState([]);
+  const [next, setNext] = useState(null);
+  const [prev, setPrev] = useState(null);
 
   useEffect(() => {
     // TODO: Add API Request here - must run in `useEffect`
