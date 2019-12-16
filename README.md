@@ -27,7 +27,7 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ]  Explain benefit(s) using `client-side routing`?
 
-> Answer:
+- Client-side routing is beneficial for load time optimizations. Routing on the client's side necessitates downloading the pages only once, then loading new content via javascript, whereas the alternative has to redownload each page from an external server every time the route changes.
 
 ## Project Set Up
 
