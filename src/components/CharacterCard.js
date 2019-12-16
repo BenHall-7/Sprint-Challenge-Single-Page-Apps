@@ -1,5 +1,9 @@
 import React from "react";
 
-export default function CharacterCard() {
-  return <span>todo: character</span>;
+export default function CharacterCard(props) {
+  return (
+    <div>
+      
+    </div>
+  )
 }
